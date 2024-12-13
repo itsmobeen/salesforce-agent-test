@@ -3,67 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Script Loader</title>
+    <title>Load Embedded Messaging</title>
 </head>
 <body>
-    <h1>Dynamic Script Loader</h1>
-    <button onclick="loadScript(1)">Load Script 1</button>
-    <button onclick="loadScript(2)">Load Script 2</button>
+    <h1>Select Embedded Messaging Service</h1>
 
-    <!-- Placeholder for dynamically loaded scripts -->
+    <!-- Buttons to Load Embedded Messaging -->
+    <button onclick="loadEmbeddedMessaging(1)">Load Mobeen ASA Embedded Service</button>
+    <button onclick="loadEmbeddedMessaging(2)">Load Github Embedded Service</button>
 
-    <script>
-        // Function to dynamically load a script
-        function loadScript(scriptId) {
-            // Remove any existing dynamic script
-            const existingScript = document.getElementById('dynamicScript');
-            if (existingScript) {
-                existingScript.remove();
-            }
-
-            // Create the script dynamically
+    <script type="text/javascript">
+        // Function to load the appropriate Embedded Messaging Script based on user selection
+        function loadEmbeddedMessaging(selectedButton) {
             const script = document.createElement('script');
-            script.id = 'dynamicScript';
             script.type = 'text/javascript';
 
-            if (scriptId === 1) {
-                script.innerHTML = `
-                    (function initEmbeddedMessaging() {
-                        try {
-                            embeddedservice_bootstrap.settings.language = 'en_US';
-                            embeddedservice_bootstrap.init(
-                                '00Dal00000jLk2l',
-                                'Mobeen_ASA_Embedded_Service',
-                                'https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734103431533',
-                                { scrt2URL: 'https://storm-eb6548a9d90757.my.salesforce-scrt.com' }
-                            );
-                        } catch (err) {
-                            console.error('Error loading Embedded Messaging: ', err);
-                        }
-                    })();
-                `;
-            } else if (scriptId === 2) {
-                script.innerHTML = `
-                    (function initEmbeddedMessaging() {
-                        try {
-                            embeddedservice_bootstrap.settings.language = 'en_US';
-                            embeddedservice_bootstrap.init(
-                                '00Dal00000jLk2l',
-                                'Github',
-                                'https://storm-eb6548a9d90757.my.site.com/ESWGithub1731084100499',
-                                { scrt2URL: 'https://storm-eb6548a9d90757.my.salesforce-scrt.com' }
-                            );
-                        } catch (err) {
-                            console.error('Error loading Embedded Messaging: ', err);
-                        }
-                    })();
-                `;
+            // Load the first embedded script when button 1 is clicked
+            if (selectedButton === 1) {
+                script.src = "https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734103431533/assets/js/bootstrap.min.js";
+                script.onload = function() {
+                    initEmbeddedMessaging(
+                        '00Dal00000jLk2l',
+                        'Mobeen_ASA_Embedded_Service',
+                        'https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734103431533'
+                    );
+                };
+            }
+            // Load the second embedded script when button 2 is clicked
+            else if (selectedButton === 2) {
+                script.src = "https://storm-eb6548a9d90757.my.site.com/ESWGithub1731084100499/assets/js/bootstrap.min.js";
+                script.onload = function() {
+                    initEmbeddedMessaging(
+                        '00Dal00000jLk2l',
+                        'Github',
+                        'https://storm-eb6548a9d90757.my.site.com/ESWGithub1731084100499'
+                    );
+                };
+            } else {
+                console.error("Invalid selection. Please choose a valid button.");
+                return;
             }
 
-            // Append the script to the body
+            // Append the script to the document body to load the external JS
             document.body.appendChild(script);
+        }
+
+        // Function to initialize the Embedded Messaging
+        function initEmbeddedMessaging(accountId, serviceName, siteUrl) {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // Set language for the messaging service
+                embeddedservice_bootstrap.init(
+                    accountId,
+                    serviceName,
+                    siteUrl,
+                    {
+                        scrt2URL: 'https://storm-eb6548a9d90757.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
         }
     </script>
 </body>
 </html>
-
