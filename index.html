@@ -23,7 +23,8 @@
 </script>
 <script type='text/javascript' src='https://storm-eb6548a9d90757.my.site.com/ESWGithub1731084100499/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
  -->
-<script type='text/javascript' src='https://service.force.com/embeddedservice/menu/fab.min.js'></script>
+	//Prechat code Menu
+<!-- <script type='text/javascript' src='https://service.force.com/embeddedservice/menu/fab.min.js'></script>
 <script type='text/javascript'>
 	var initESW = function(gslbBaseURL) {
 		// Required if you want labels in a language that’s different from your user’s context.
@@ -48,7 +49,29 @@
 	} else {
 		initESW('https://service.force.com');
 	}
+</script> -->
+
+//Multiple Agents
+<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00Dal00000jLk2l',
+				'Mobeen_ASA_Embedded_Service',
+				'https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734102669492',
+				{
+					scrt2URL: 'https://storm-eb6548a9d90757.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
 </script>
+<script type='text/javascript' src='https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734102669492/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 	
 </body>
 </html>
