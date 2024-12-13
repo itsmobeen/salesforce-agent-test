@@ -13,25 +13,14 @@
                 existingScript.remove();
             }
 
-            // Remove any existing inline init script
-            const existingInitScript = document.getElementById('dynamicInitScript');
-            if (existingInitScript) {
-                existingInitScript.remove();
-            }
-
-            // Create the init script dynamically
-            const initScript = document.createElement('script');
-            initScript.id = 'dynamicInitScript';
-            initScript.type = 'text/javascript';
-
-            // Create the external script dynamically
+            // Create the script dynamically
             const script = document.createElement('script');
             script.id = 'dynamicScript';
             script.type = 'text/javascript';
 
             if (scriptId === 1) {
-                initScript.innerHTML = `
-                    function initEmbeddedMessaging() {
+                script.innerHTML = `
+                    (function initEmbeddedMessaging() {
                         try {
                             embeddedservice_bootstrap.settings.language = 'en_US';
                             embeddedservice_bootstrap.init(
@@ -43,13 +32,11 @@
                         } catch (err) {
                             console.error('Error loading Embedded Messaging: ', err);
                         }
-                    };
+                    })();
                 `;
-                script.src = 'https://storm-eb6548a9d90757.my.site.com/ESWMobeenASAEmbeddedSe1734103431533/assets/js/bootstrap.min.js';
-                script.onload = 'initEmbeddedMessaging()';
             } else if (scriptId === 2) {
-                initScript.innerHTML = `
-                    function initEmbeddedMessaging() {
+                script.innerHTML = `
+                    (function initEmbeddedMessaging() {
                         try {
                             embeddedservice_bootstrap.settings.language = 'en_US';
                             embeddedservice_bootstrap.init(
@@ -61,14 +48,11 @@
                         } catch (err) {
                             console.error('Error loading Embedded Messaging: ', err);
                         }
-                    };
+                    })();
                 `;
-                script.src = 'https://storm-eb6548a9d90757.my.site.com/ESWGithub1731084100499/assets/js/bootstrap.min.js';
-                script.onload = 'initEmbeddedMessaging()';
             }
 
-            // Append the scripts to the body
-            document.body.appendChild(initScript);
+            // Append the script to the body
             document.body.appendChild(script);
         }
     </script>
@@ -80,5 +64,4 @@
 
     <!-- Placeholder for dynamically loaded scripts -->
 </body>
-</html>
 </html>
