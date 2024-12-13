@@ -11,6 +11,7 @@
     <!-- Buttons to Load Embedded Messaging -->
     <button onclick="loadEmbeddedMessaging(1)">Load Mobeen ASA Embedded Service</button>
     <button onclick="loadEmbeddedMessaging(2)">Load Github Embedded Service</button>
+    <button onclick="loadFABMenu()">Load Floating Action Button Menu</button>
 
     <script type="text/javascript">
         // Function to load the appropriate Embedded Messaging Script based on user selection
@@ -64,6 +65,31 @@
                 console.error('Error loading Embedded Messaging: ', err);
             }
         }
+
+        // Function to load the Floating Action Button (FAB) Menu
+        function loadFABMenu() {
+            const initESW = function(gslbBaseURL) {
+                embedded_svc.menu.init(
+                    'https://storm-eb6548a9d90757.my.salesforce.com',
+                    'https://d.la11-core1.sfdc-8tgtt5.salesforceliveagent.com/chat',
+                    gslbBaseURL,
+                    '00Dal00000jLk2l',
+                    'TestChannelMenu'
+                );
+            };
+
+            if (!window.embedded_svc || !window.embedded_svc.menu) {
+                const fabScript = document.createElement('script');
+                fabScript.setAttribute('src', 'https://storm-eb6548a9d90757.my.salesforce.com/embeddedservice/menu/fab.min.js');
+                fabScript.onload = function() {
+                    initESW(null);
+                };
+                document.body.appendChild(fabScript);
+            } else {
+                initESW('https://service.force.com');
+            }
+        }
     </script>
 </body>
 </html>
+Key Features of the Code:
